@@ -6,3 +6,16 @@ content-type: application/json
     "username": "thiagocifani",
     "password": "12345678"
 }
+
+
+POST http://localhost:8080/tasks/ HTTP/1.1
+content-type: application/json
+
+{
+    "description": "Tarefa para gravar o curso de java",
+    "title": "Gravacão de aula",
+    "priority": "ALTA",
+    "startAt": "2023-10-06T12:30:00" ,
+    "endAt": "2023-10-06T13:30:00",
+    "userId": "1"
+}
