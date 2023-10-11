@@ -7,9 +7,11 @@ content-type: application/json
     "password": "12345678"
 }
 
+###
 
 POST http://localhost:8080/tasks/ HTTP/1.1
 content-type: application/json
+Authorization: Basic thiagocifani:12345678
 
 {
     "description": "Tarefa para gravar o curso de java",
@@ -17,5 +19,5 @@ content-type: application/json
     "priority": "ALTA",
     "startAt": "2023-10-06T12:30:00" ,
     "endAt": "2023-10-06T13:30:00",
-    "userId": "1"
+    "userId": "a3b3e7af-0cb2-4b13-9141-ac7946e535ba"
 }
