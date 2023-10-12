@@ -9,13 +9,17 @@ import org.springframework.boot.actuate.autoconfigure.observation.ObservationPro
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.thiagocifani.todolist.models.Task;
 import br.com.thiagocifani.todolist.repositories.ITaskRepository;
+import br.com.thiagocifani.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -56,4 +60,10 @@ public class TasksController {
 
   }
 
+  @PutMapping("/{id}")
+  public Task update(@RequestBody Task requestTask, @PathVariable UUID id) {
+    var task = this.taskRepository.findById(id).orElse(null);
+    Utils.copyNonNullProperties(requestTask, task);
+    return this.taskRepository.save(task);
+  }
 }

@@ -27,3 +27,15 @@ GET http://localhost:8080/tasks/ HTTP/1.1
 content-type: application/json
 Authorization: Basic thiagocifani:12345678
 
+
+###
+
+PUT http://localhost:8080/tasks/07c29fc4-f229-44f7-bcb3-ec8f5987d1c2 HTTP/1.1
+content-type: application/json
+Authorization: Basic thiagocifani:12345678
+
+{
+    "description": "Nova descrição",
+    "title": "Aula de Go",
+    "priority": "BAIXA"
+}
