@@ -24,11 +24,12 @@ public class FilterTaskAuth extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
 
-    var authorization = request.getHeader("Authorization");
+    var servletPath = request.getServletPath();
 
-    if (authorization == null) {
+    if (!servletPath.equals("/tasks/")) {
       filterChain.doFilter(request, response);
     } else {
+      var authorization = request.getHeader("Authorization");
 
       var authEncoded = authorization.substring("Basic".length()).trim();
 
@@ -48,6 +49,7 @@ public class FilterTaskAuth extends OncePerRequestFilter {
         var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
 
         if (passwordVerify.verified) {
+          request.setAttribute("userId", user.getId());
           filterChain.doFilter(request, response);
         } else {
           response.sendError(401);
