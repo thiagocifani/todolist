@@ -1,11 +1,14 @@
 package br.com.thiagocifani.todolist.controllers;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,15 @@ public class TasksController {
     var task = this.taskRepository.save(requestTask);
 
     return ResponseEntity.ok(task);
+  }
+
+  @GetMapping("/")
+  public List<Task> index(HttpServletRequest request) {
+    var userId = request.getAttribute("userId");
+    var tasks = this.taskRepository.findByUserId((UUID) userId);
+
+    return tasks;
+
   }
 
 }

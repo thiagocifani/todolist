@@ -18,5 +18,12 @@ Authorization: Basic thiagocifani:12345678
     "title": "Gravacão de aula",
     "priority": "ALTA",
     "startAt": "2023-10-13T12:30:00" ,
-    "endAt": "2023-10-12T17:30:00"
+    "endAt": "2023-10-14T17:30:00"
 }
+
+###
+
+GET http://localhost:8080/tasks/ HTTP/1.1
+content-type: application/json
+Authorization: Basic thiagocifani:12345678
+
